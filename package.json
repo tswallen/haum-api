@@ -1,0 +1,20 @@
+{
+  "name": "haum-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "nodemon ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mongoose": "^5.3.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
