@@ -27,7 +27,6 @@ app.get('/properties',
         Property.find($query)
         .limit(10)
         .exec((err, $res) => res.json($res))
-
     }
 );
 
@@ -36,5 +35,5 @@ app.get('/properties/:id',
         .exec((err, $res) => res.json($res))
 );
 
-/* Run */
+/* Listen */
 app.listen(port, () => console.log(`HAUM API listening on port ${port}!`));
