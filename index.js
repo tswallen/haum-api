@@ -25,14 +25,46 @@ app.get('/properties',
         });
 
         Property.find($query)
-        .limit(10)
-        .exec((err, $res) => res.json($res))
+            .limit(10)
+            .exec((err, $res) => {
+                const $$res = [];
+
+                $res.forEach(property => {
+                    $$res.push(
+                        {
+                            id: property._id,
+                            name: property.name,
+
+                            price: property.price,
+
+                            location: property.location,
+                            tags: property.tags
+                        }
+                    )
+                })
+
+                res.json($$res);
+            })
     }
 );
 
 app.get('/properties/:id',
-    (req, res) => Property.findById(req.params.id)
-        .exec((err, $res) => res.json($res))
+    (req, res) =>  Property.findById(req.params.id)
+        .exec((err, $res) => {
+            let $$res;
+
+            $$res = {
+                id: $res._id,
+                name: $res.name,
+
+                price: $res.price,
+
+                location: $res.location,
+                tags: $res.tags
+            }
+
+            res.json($$res);
+        })
 );
 
 /* Listen */
