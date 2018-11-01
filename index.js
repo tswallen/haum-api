@@ -5,7 +5,7 @@ const port = 3000
 const mongoose = require('mongoose')
 
 /* Definitions */
-const Property = mongoose.model('Property', { name: String, price: String, location: String, tags: Array });
+const Property = mongoose.model('Property', { name: String, price: String, location: String, bathrooms: Number, bedrooms: Number, parking: Number, tags: Array, images: Array });
 
 /* Initialisation */
 mongoose.connect('mongodb://localhost:27017/properties');
@@ -37,8 +37,14 @@ app.get('/properties',
 
                             price: property.price,
 
+                            bathrooms: property.bathrooms,
+                            bedrooms: property.bedrooms,
+                            parking: property.parking,
+
                             location: property.location,
-                            tags: property.tags
+                            tags: property.tags,
+
+                            images: property.images
                         }
                     )
                 })
@@ -59,8 +65,14 @@ app.get('/properties/:id',
 
                 price: $res.price,
 
+                bathrooms: $res.bathrooms,
+                bedrooms: $res.bedrooms,
+                parking: $res.parking,
+
                 location: $res.location,
-                tags: $res.tags
+                tags: $res.tags,
+
+                images: $res.images
             }
 
             res.json($$res);
