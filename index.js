@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 
 /* Definitions */
 const Property = mongoose.model('Property', { name: String, price: String, location: String, bathrooms: Number, bedrooms: Number, parking: Number, tags: Array, images: Array });
+let range = 1;
 
 /* Initialisation */
 mongoose.connect('mongodb://localhost:27017/properties');
@@ -15,16 +16,22 @@ app.use((req, res, next) => {
     next();
 });
 
+range = range + 1;
+
 /* App */
 app.get('/properties',
     (req, res) => {
         let $query = {};
 
         Object.keys(req.query).forEach(query => {
-            $query[query] = req.query[query]
+            $query[query] = {
+                $lt: req.query[query] + range,
+                $gt: req.query[query] - range
+            }
         });
 
-        Property.find($query)
+        Property
+            .find($query)
             .limit(10)
             .exec((err, $res) => {
                 const $$res = [];
@@ -55,7 +62,7 @@ app.get('/properties',
 );
 
 app.get('/properties/:id',
-    (req, res) =>  Property.findById(req.params.id)
+    (req, res) => Property.findById(req.params.id)
         .exec((err, $res) => {
             let $$res;
 
