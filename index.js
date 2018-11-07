@@ -24,6 +24,10 @@ app.get('/properties',
         let $query = {};
 
         Object.keys(req.query).forEach(query => {
+            if (query === 'location' || 'price') {
+                $query[query] = req.query[query]
+                return;
+            }
             $query[query] = {
                 $lt: req.query[query] + range,
                 $gt: req.query[query] - range
