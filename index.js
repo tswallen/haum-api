@@ -36,6 +36,12 @@ app.get('/properties',
 
         Property
             .find($query)
+            .sort({
+                price: 1,
+                bedrooms: -1,
+                parking: -1,
+                bathrooms: -1
+            })
             .limit(10)
             .exec((err, $res) => {
                 const $$res = [];
