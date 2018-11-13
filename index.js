@@ -42,7 +42,7 @@ app.get('/properties',
                 parking: -1,
                 bathrooms: -1
             })
-            .limit(10)
+            .limit(8)
             .exec((err, $res) => {
                 const $$res = [];
 
