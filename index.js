@@ -9,7 +9,7 @@ const Property = mongoose.model('Property', { name: String, price: String, locat
 let range = 1;
 
 /* Initialisation */
-mongoose.connect('mongodb://localhost:27017/properties');
+mongoose.connect('');
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
