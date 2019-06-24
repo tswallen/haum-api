@@ -2,14 +2,15 @@
 const express = require('express')
 const app = express()
 const port = 3000
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const config = require('./config');
 
 /* Definitions */
 const Property = mongoose.model('Property', { name: String, price: String, location: String, bathrooms: Number, bedrooms: Number, parking: Number, tags: Array, images: Array });
 let range = 1;
 
 /* Initialisation */
-mongoose.connect('');
+mongoose.connect(config.database);
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
